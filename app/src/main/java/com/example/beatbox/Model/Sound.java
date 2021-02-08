@@ -1,5 +1,7 @@
 package com.example.beatbox.Model;
 
+import java.io.File;
+
 public class Sound {
     private String mName;
     private String mPathFile;
@@ -20,9 +22,13 @@ public class Sound {
         mPathFile = pathFile;
     }
 
-    public Sound(String name, String pathFile) {
-        mName = name;
+    public Sound( String pathFile) {
+
         mPathFile = pathFile;
+        String []sections = pathFile.split(File.separator);
+        String fileNameWithExtension = sections[sections.length - 1];
+        int lastDotIndex = fileNameWithExtension.lastIndexOf(".");
+        mName = fileNameWithExtension.substring(0 , lastDotIndex);
     }
 
     public Sound() {

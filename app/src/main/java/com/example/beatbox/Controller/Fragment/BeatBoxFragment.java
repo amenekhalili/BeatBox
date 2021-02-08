@@ -14,12 +14,14 @@ import android.widget.Button;
 
 import com.example.beatbox.Model.Sound;
 import com.example.beatbox.R;
+import com.example.beatbox.Repository.BeatBoxRepository;
 
 import java.util.List;
 
 
 public class BeatBoxFragment extends Fragment {
     private RecyclerView mRecyclerView;
+    private BeatBoxRepository mBeatBoxRepository;
 
     public BeatBoxFragment() {
         // Required empty public constructor
@@ -38,6 +40,7 @@ public class BeatBoxFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mBeatBoxRepository = BeatBoxRepository.getInstance(getActivity());
     }
 
     @Override
@@ -61,6 +64,9 @@ public class BeatBoxFragment extends Fragment {
 
 
     private void setAdapter(){
+        List<Sound> sounds = mBeatBoxRepository.getSound();
+        SoundAdapter adapter = new SoundAdapter(sounds);
+        mRecyclerView.setAdapter(adapter);
 
     }
     private class SoundHolder extends RecyclerView.ViewHolder{
@@ -77,6 +83,7 @@ public class BeatBoxFragment extends Fragment {
 
         public void bindSound(Sound sound){
             mSound = sound;
+            mButton.setText(mSound.getName());
         }
     }
 
