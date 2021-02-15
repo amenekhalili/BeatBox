@@ -5,6 +5,15 @@ import java.io.File;
 public class Sound {
     private String mName;
     private String mPathFile;
+    private Integer mSoundId;
+
+    public Integer getSoundId() {
+        return mSoundId;
+    }
+
+    public void setSoundId(Integer soundId) {
+        mSoundId = soundId;
+    }
 
     public String getName() {
         return mName;
