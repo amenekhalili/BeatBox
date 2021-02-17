@@ -1,5 +1,6 @@
 package com.example.beatbox.Controller.Fragment;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -67,7 +68,15 @@ public class BeatBoxFragment extends Fragment {
     }
 
     private void initViews() {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext() , 3));
+        int spanCount = 0 ;
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+         spanCount = 4 ;
+        } else {
+            spanCount = 3;
+        }
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext() ,spanCount));
     }
 
 
