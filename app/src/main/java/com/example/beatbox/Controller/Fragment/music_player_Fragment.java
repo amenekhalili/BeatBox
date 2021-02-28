@@ -1,6 +1,7 @@
 package com.example.beatbox.Controller.Fragment;
 
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.beatbox.Model.Music;
-import com.example.beatbox.Model.Sound;
 import com.example.beatbox.R;
-import com.example.beatbox.Repository.musicRepository;
 
 import java.util.List;
 
@@ -23,7 +22,9 @@ import java.util.List;
 public class music_player_Fragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private musicRepository mMusicRepository;
+    //private musicRepository mMusicRepository;
+    private MediaPlayer MusicPlayer;
+
 
 
     public music_player_Fragment() {
@@ -41,7 +42,11 @@ public class music_player_Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mMusicRepository = musicRepository.getInstance(getActivity());
+       // mMusicRepository = musicRepository.getInstance(getActivity());
+        MusicPlayer = MediaPlayer.create(getActivity() ,R.raw.first);
+        MusicPlayer = MediaPlayer.create(getActivity() , R.raw.second);
+
+
 
     }
 
@@ -76,9 +81,13 @@ public class music_player_Fragment extends Fragment {
 
     private void setAdapter() {
 
-        List<Music> music = mMusicRepository.getMusic();
-        MusicAdapter adapter = new  MusicAdapter(music);
-        mRecyclerView.setAdapter(adapter);
+        List<Music> music = (List<Music>) MusicPlayer;
+       MusicAdapter adapter = new MusicAdapter(music);
+       mRecyclerView.setAdapter(adapter);
+
+      //  List<Music> music = mMusicRepository.getMusic();
+       // MusicAdapter adapter = new  MusicAdapter(music);
+        //mRecyclerView.setAdapter(adapter);
     }
 
 
@@ -97,7 +106,8 @@ public class music_player_Fragment extends Fragment {
             mButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mMusicRepository.playMusic(mMusic);
+                    MusicPlayer.start();
+               //     mMusicRepository.playMusic(mMusic);
                 }
             });
         }
