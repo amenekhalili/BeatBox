@@ -18,6 +18,7 @@ public class BeatBoxRepository {
     private static String Asset_folder = "sound";
     private static BeatBoxRepository sInstance;
     private Context mContext;
+
     private SoundPool mSoundPool;
     private List<Sound> mSounds = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class BeatBoxRepository {
     private void loudSounds() {
 
         AssetManager assetManager = mContext.getAssets();
-
+        ;
         try {
             String[] FileName = assetManager.list(Asset_folder);
             for (String filename : FileName) {
